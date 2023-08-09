@@ -30,13 +30,13 @@ async function getAllCharacters () {
 
 async function searchCharacters () {
 
-try {
-  const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchText.value}`);
-  characters.value = response.data.results;
-  
-} catch (e) {
-  console.error(e);
-}
+  try {
+    const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchText.value}`);
+    characters.value = response.data.results;
+    
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 onMounted(() => {
