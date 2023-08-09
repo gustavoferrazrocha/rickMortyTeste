@@ -5,6 +5,7 @@ import axios from 'axios';
 import CardComponent from "../components/CardComponent.vue";
 
 let characters = ref<Array<Character>>([]);
+const searchText = ref('');
 
 interface Character {
   id: number;
@@ -27,6 +28,17 @@ async function getAllCharacters () {
   }
 }
 
+async function searchCharacters () {
+
+try {
+  const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchText.value}`);
+  characters.value = response.data.results;
+  
+} catch (e) {
+  console.error(e);
+}
+}
+
 onMounted(() => {
   getAllCharacters();
 })
@@ -36,7 +48,8 @@ onMounted(() => {
 
 
 <template>
-  <section className='min-h-screen flex justify-center items-center'>
+  <section className='min-h-screen flex flex-col items-center'>
+    <input className='m-4 p-4 border-2' v-model="searchText" @input="searchCharacters" placeholder="Search characters">
     <main v-if="characters" className="grid 2xl:grid-cols-3 gap-5 xl:grid-cols-2 3xl:grid-cols-4">
       <CardComponent 
       v-for="character in characters" 
