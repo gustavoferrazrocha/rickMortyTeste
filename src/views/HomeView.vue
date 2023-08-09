@@ -4,7 +4,17 @@ import { onMounted, ref } from 'vue'
 import axios from 'axios';
 import CardComponent from "../components/CardComponent.vue";
 
-let characters: Array<Object> = ref([]);
+let characters = ref<Array<Character>>([]);
+
+interface Character {
+  id: number;
+  name: string;
+  status: string;
+  species: string;
+  location: { name: string };
+  origin: { name: string };
+  image: string;
+}
 
 async function getAllCharacters () {
 
