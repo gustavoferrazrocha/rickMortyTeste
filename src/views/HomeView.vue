@@ -88,7 +88,7 @@ onMounted(() => {
     prev-icon="mdi-menu-left"
     next-icon="mdi-menu-right"
     :length="infoPagination.pages"
-    :total-visible="7">
+    :total-visible="5">
   </v-pagination>
   </section>
 </template>
