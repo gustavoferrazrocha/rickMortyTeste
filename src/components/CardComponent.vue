@@ -2,21 +2,30 @@
 import InfoLocation from './InfoLocation.vue';
 import Status from './StatusComponent.vue';
 
+const props = defineProps({
+  status: String,
+  species: String,
+  location: String,
+  name: String,
+  image: String,
+  title: String,
+})
+
 
 </script>
 
 <template>
   <div class="card">
     <div class="card__img">
-      <img src="https://rickandmortyapi.com/api/character/avatar/141.jpeg" alt="">
+      <img :src="image" alt="">
     </div>
     <div class="card__info">
-      <h1 class="card__name">Ghost in a Jar</h1>
-      <Status status="Unknown" species="Alien"/>
+      <h1 class="card__name">{{ name }}</h1>
+      <Status :status="status" :species="species"/>
 
       <div class="card__location">
-        <InfoLocation title="Last known location: " location="Earth (Replacement Dimension)"/>
-        <InfoLocation title="First seen in: " location="Total Rickall"/>
+        <InfoLocation :title="title" :location="location"/>
+        <InfoLocation :title="title" :location="location"/>
       </div>
     </div>
   </div>
