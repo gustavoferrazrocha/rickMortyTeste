@@ -8,7 +8,7 @@ const props = defineProps({
   location: String,
   name: String,
   image: String,
-  title: String,
+  origin: String,
 })
 
 
@@ -24,8 +24,8 @@ const props = defineProps({
       <Status :status="status" :species="species"/>
 
       <div class="card__location">
-        <InfoLocation :title="title" :location="location"/>
-        <InfoLocation :title="title" :location="location"/>
+        <InfoLocation title="Last known location:" :location="location"/>
+        <InfoLocation title="First seen in:" :location="origin"/>
       </div>
     </div>
   </div>
