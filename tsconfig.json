@@ -10,8 +10,5 @@
     {
       "path": "./tsconfig.cypress-ct.json"
     }
-  ],
-  "paths": {
-    "@components": ["./src/components"],
-  },
+  ]
 }
