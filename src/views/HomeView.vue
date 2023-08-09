@@ -6,6 +6,8 @@ import CardComponent from "../components/CardComponent.vue";
 
 let characters = ref<Array<Character>>([]);
 
+let currentPage = ref<number>(1);
+
 let infoPagination = ref<InfoPagination>()
 
 const searchText = ref('');
@@ -38,20 +40,30 @@ async function getAllCharacters () {
   }
 }
 
-async function getDataInCurrentPage (currentPage:number) {
+async function getDataInCurrentPage () {
   try {
-    const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${currentPage}`);
-    characters.value = response.data.results;
+    if(searchText.value.length > 0) {
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${currentPage.value}&name=${searchText.value}`)
+      characters.value = response.data.results;
+      infoPagination.value = response.data.info;
+    } else {
+      const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${currentPage.value}`);
+      characters.value = response.data.results;
+      infoPagination.value = response.data.info;
+    }
   } catch (e) {
     console.error(e);
   }
 }
 
 async function searchCharacters () {
+  const firstPage: number = 1;
 
+  currentPage.value = firstPage;
   try {
     const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchText.value}`);
     characters.value = response.data.results;
+    infoPagination.value = response.data.info;
     
   } catch (e) {
     console.error(e);
@@ -86,6 +98,7 @@ onMounted(() => {
     className='pb-10'
     prev-icon="mdi-menu-left"
     next-icon="mdi-menu-right"
+    v-model="currentPage"
     @update:model-value="getDataInCurrentPage"
     :length="infoPagination.pages"
     :total-visible="5">
