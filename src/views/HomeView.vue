@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue';
 
 import axios from 'axios';
-import CardComponent from "../components/CardComponent.vue";
-import type { InfoPaginationProps } from "../interfaces/infoPaginationProps"
-import type { CharacterProps } from "../interfaces/characterProps"
+import CardComponent from '../components/CardComponent.vue';
+import type { InfoPaginationProps } from '../interfaces/infoPaginationProps';
+import type { CharacterProps } from '../interfaces/characterProps';
+
 
 const characters = ref<Array<CharacterProps>>([]);
 const currentPage = ref<number>(1);
-const infoPagination = ref<InfoPaginationProps>()
-
+const infoPagination = ref<InfoPaginationProps>();
+const selectStatus = ref<string[]>(['Alive', 'Dead', 'Unknown']);
+const currentStatus = ref<string | null>('');
 const searchText = ref('');
 
 
@@ -23,15 +25,22 @@ async function fetchData(url: string): Promise<void> {
   }
 }
 
-async function getAllCharacters (): Promise<void> {
+async function getAllCharacters(): Promise<void> {
   await fetchData('https://rickandmortyapi.com/api/character');
 }
 
-async function getDataInCurrentPage(): Promise<void> {
-  const url = searchText.value
-    ? `https://rickandmortyapi.com/api/character/?page=${currentPage.value}&name=${searchText.value}`
-    : `https://rickandmortyapi.com/api/character/?page=${currentPage.value}`;
+function buildApiUrl() {
+  const params = new URLSearchParams();
+  params.append('page', currentPage.value.toString());
+  
+  if (searchText.value) params.append('name', searchText.value);
+  if (currentStatus.value) params.append('status', currentStatus.value);
 
+  return `https://rickandmortyapi.com/api/character/?${params.toString()}`;
+}
+
+async function getDataInCurrentPage(): Promise<void> {
+  const url = buildApiUrl();
   await fetchData(url);
 }
 
@@ -41,14 +50,19 @@ async function searchCharacters(): Promise<void> {
 }
 
 function resetPageWhenSearching(): number {
-  return currentPage.value = 1;
+  return (currentPage.value = 1);
+}
+
+
+
+function getValueStatus(status: string | null ): string {
+  currentStatus.value = status;
+  return String(status);
 }
 
 onMounted(() => {
   getAllCharacters();
-})
-
-
+});
 </script>
 
 
@@ -56,9 +70,10 @@ onMounted(() => {
   <section className='min-h-screen flex flex-col items-center gap-4'>
     <div className='flex flex-col gap-5 pt-5'>
 
-      <header>
-        <v-card-text className="w-full">
+      <header className="flex gap-5">
+        <v-card-text className="w-9/12">
           <v-text-field
+            className="h-9"
             density="compact"
             v-model="searchText"
             @input="searchCharacters"
@@ -69,6 +84,10 @@ onMounted(() => {
             hide-details
           ></v-text-field>
         </v-card-text>
+        <div className="w-2/12">
+          <v-select @update:modelValue='getValueStatus' clearable label="Select status" :items="selectStatus" variant="solo"></v-select>
+        </div>
+        
       </header>
   
       <main v-if="characters" className="grid 2xl:grid-cols-3 gap-5 xl:grid-cols-2 3xl:grid-cols-4">
