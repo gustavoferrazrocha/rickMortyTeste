@@ -34,11 +34,14 @@ const props = defineProps({
 <style lang="postcss" scoped>
 
 .card {
-  @apply flex h-56 shadow-xl bg-white rounded-lg overflow-hidden text-black w-[550px] gap-3 hover:scale-105 cursor-pointer;
+  @apply flex h-56 shadow-xl bg-white rounded-lg overflow-hidden text-black w-[550px] gap-3;
+  @apply sm:flex sm:flex-col sm:w-80 hover:scale-105 sm:h-full cursor-pointer;
+
 }
 
 .card__info {
   @apply flex flex-col justify-around;
+  @apply sm:flex sm:items-center sm:flex-col sm:p-4;
 }
 
 .card__name {
@@ -47,9 +50,10 @@ const props = defineProps({
 
 .card__location {
   @apply flex flex-col gap-2;
+  @apply sm:flex sm:gap-5 sm:mt-8
 }
 
 img {
-  @apply h-full;
+  @apply h-full w-full;
 }
 </style>
