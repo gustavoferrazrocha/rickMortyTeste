@@ -36,7 +36,7 @@ async function getDataInCurrentPage(): Promise<void> {
 }
 
 async function searchCharacters(): Promise<void> {
-  resetPageWhenSearching(); // Reset page when searching
+  resetPageWhenSearching();
   await getDataInCurrentPage();
 }
 
