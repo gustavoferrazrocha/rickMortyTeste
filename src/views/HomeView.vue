@@ -78,7 +78,7 @@ onMounted(() => {
             v-model="searchText"
             @input="searchCharacters"
             variant="solo"
-            label="Search templates"
+            label="Search characters"
             append-inner-icon="mdi-magnify"
             single-line
             hide-details
