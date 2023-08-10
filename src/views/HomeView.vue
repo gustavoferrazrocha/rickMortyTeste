@@ -3,8 +3,8 @@ import { onMounted, ref } from 'vue'
 
 import axios from 'axios';
 import CardComponent from "../components/CardComponent.vue";
-import { InfoPaginationProps } from "../interfaces/infoPaginationProps"
-import { CharacterProps } from "../interfaces/characterProps"
+import type { InfoPaginationProps } from "../interfaces/infoPaginationProps"
+import type { CharacterProps } from "../interfaces/characterProps"
 
 const characters = ref<Array<CharacterProps>>([]);
 const currentPage = ref<number>(1);
