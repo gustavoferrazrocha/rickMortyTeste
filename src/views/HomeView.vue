@@ -68,10 +68,10 @@ onMounted(() => {
 
 <template>
   <section className='min-h-screen flex flex-col items-center gap-4'>
-    <div className='flex flex-col gap-5 pt-5'>
+    <div className='flex flex-col gap-5 pt-5 max-xl:items-center'>
 
-      <header className="flex gap-5">
-        <v-card-text className="w-9/12">
+      <header className="flex gap-5 max-xl:flex-col max-xl:w-full">
+        <v-card-text className="w-9/12 max-xl:w-full">
           <v-text-field
             className="h-9"
             density="compact"
@@ -84,7 +84,7 @@ onMounted(() => {
             hide-details
           ></v-text-field>
         </v-card-text>
-        <div className="w-2/12">
+        <div className="w-2/12 max-xl:w-full">
           <v-select @update:modelValue='getValueStatus' clearable label="Select status" :items="selectStatus" variant="solo"></v-select>
         </div>
         
