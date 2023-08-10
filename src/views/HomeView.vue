@@ -36,8 +36,12 @@ async function getDataInCurrentPage(): Promise<void> {
 }
 
 async function searchCharacters(): Promise<void> {
-  currentPage.value = 1; // Reset page when searching
+  resetPageWhenSearching(); // Reset page when searching
   await getDataInCurrentPage();
+}
+
+function resetPageWhenSearching(): number {
+  return currentPage.value = 1;
 }
 
 onMounted(() => {
