@@ -11,6 +11,6 @@ const props = defineProps({
 
 <template>
   <p className="text-zinc-400">{{title}}<br>
-  <span className='text-xl text-white'>{{location}}</span>
+  <span className='text-xl text-zinc-700'>{{location}}</span>
   </p>
 </template>
