@@ -54,29 +54,44 @@ onMounted(() => {
 
 <template>
   <section className='min-h-screen flex flex-col items-center gap-4'>
-    <input className='m-4 p-4 border-2 border-solid border-zinc-800' v-model="searchText" @input="searchCharacters" placeholder="Search characters">
-    <main v-if="characters" className="grid 2xl:grid-cols-3 gap-5 xl:grid-cols-2 3xl:grid-cols-4">
-      <CardComponent 
-      v-for="character in characters" 
-      :key="character.id"
-      :name="character.name" 
-      :status="character.status"
-      :species="character.species"
-      :location="character.location.name"
-      :origin="character.origin.name"
-      :image="character.image"
-      />
-    </main>
-    <v-pagination 
-    v-if="infoPagination" 
-    className='pb-10'
-    prev-icon="mdi-menu-left"
-    next-icon="mdi-menu-right"
-    v-model="currentPage"
-    @update:model-value="getDataInCurrentPage"
-    :length="infoPagination.pages"
-    :total-visible="5">
-  </v-pagination>
+    <div className='flex flex-col gap-5 pt-5'>
+
+      <header>
+        <v-card-text className="w-full">
+          <v-text-field
+            density="compact"
+            variant="solo"
+            label="Search templates"
+            append-inner-icon="mdi-magnify"
+            single-line
+            hide-details
+          ></v-text-field>
+        </v-card-text>
+      </header>
+  
+      <main v-if="characters" className="grid 2xl:grid-cols-3 gap-5 xl:grid-cols-2 3xl:grid-cols-4">
+        <CardComponent 
+        v-for="character in characters" 
+        :key="character.id"
+        :name="character.name" 
+        :status="character.status"
+        :species="character.species"
+        :location="character.location.name"
+        :origin="character.origin.name"
+        :image="character.image"
+        />
+      </main>
+      <v-pagination 
+      v-if="infoPagination" 
+      className='pb-10'
+      prev-icon="mdi-menu-left"
+      next-icon="mdi-menu-right"
+      v-model="currentPage"
+      @update:model-value="getDataInCurrentPage"
+      :length="infoPagination.pages"
+      :total-visible="5">
+    </v-pagination>
+  </div>
   </section>
 </template>
 
