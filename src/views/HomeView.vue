@@ -3,71 +3,41 @@ import { onMounted, ref } from 'vue'
 
 import axios from 'axios';
 import CardComponent from "../components/CardComponent.vue";
+import { InfoPaginationProps } from "../interfaces/infoPaginationProps"
+import { CharacterProps } from "../interfaces/characterProps"
 
-let characters = ref<Array<Character>>([]);
-
-let currentPage = ref<number>(1);
-
-let infoPagination = ref<InfoPagination>()
+const characters = ref<Array<CharacterProps>>([]);
+const currentPage = ref<number>(1);
+const infoPagination = ref<InfoPaginationProps>()
 
 const searchText = ref('');
 
-interface InfoPagination {
-  count: number,
-  pages: number,
-  next: string,
-  prev: string,
-}
 
-interface Character {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  location: { name: string };
-  origin: { name: string };
-  image: string;
-}
-
-async function getAllCharacters () {
-
+async function fetchData(url: string): Promise<void> {
   try {
-    const response = await axios.get('https://rickandmortyapi.com/api/character');
-    infoPagination.value = response.data.info;
-    characters.value = response.data.results;  
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function getDataInCurrentPage () {
-  try {
-    if(searchText.value.length > 0) {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${currentPage.value}&name=${searchText.value}`)
-      characters.value = response.data.results;
-      infoPagination.value = response.data.info;
-    } else {
-      const response = await axios.get(`https://rickandmortyapi.com/api/character/?page=${currentPage.value}`);
-      characters.value = response.data.results;
-      infoPagination.value = response.data.info;
-    }
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-async function searchCharacters () {
-  const firstPage: number = 1;
-
-  currentPage.value = firstPage;
-  try {
-    const response = await axios.get(`https://rickandmortyapi.com/api/character/?name=${searchText.value}`);
+    const response = await axios.get(url);
     characters.value = response.data.results;
     infoPagination.value = response.data.info;
-    
   } catch (e) {
     console.error(e);
   }
+}
+
+async function getAllCharacters (): Promise<void> {
+  await fetchData('https://rickandmortyapi.com/api/character');
+}
+
+async function getDataInCurrentPage(): Promise<void> {
+  const url = searchText.value
+    ? `https://rickandmortyapi.com/api/character/?page=${currentPage.value}&name=${searchText.value}`
+    : `https://rickandmortyapi.com/api/character/?page=${currentPage.value}`;
+
+  await fetchData(url);
+}
+
+async function searchCharacters(): Promise<void> {
+  currentPage.value = 1; // Reset page when searching
+  await getDataInCurrentPage();
 }
 
 onMounted(() => {
