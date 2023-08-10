@@ -91,7 +91,7 @@ onMounted(() => {
       v-model="currentPage"
       @update:model-value="getDataInCurrentPage"
       :length="infoPagination.pages"
-      :total-visible="5">
+      :total-visible="3">
     </v-pagination>
   </div>
   </section>
