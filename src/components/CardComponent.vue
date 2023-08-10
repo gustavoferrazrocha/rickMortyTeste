@@ -34,7 +34,7 @@ const props = defineProps({
 <style lang="postcss" scoped>
 
 .card {
-  @apply flex h-56 shadow-xl bg-white rounded-lg overflow-hidden text-black w-[550px] gap-3;
+  @apply flex h-56 shadow-xl bg-white rounded-lg overflow-hidden text-black w-[550px] gap-3 hover:scale-105 cursor-pointer;
 }
 
 .card__info {
