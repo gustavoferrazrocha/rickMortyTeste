@@ -60,6 +60,8 @@ onMounted(() => {
         <v-card-text className="w-full">
           <v-text-field
             density="compact"
+            v-model="searchText"
+            @input="searchCharacters"
             variant="solo"
             label="Search templates"
             append-inner-icon="mdi-magnify"
