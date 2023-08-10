@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+import { tailwindcss, autoprefixer} from 'tailwindcss'
 export default {
   content: [
     "./index.html",
@@ -25,5 +26,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    tailwindcss,
+    autoprefixer
+  ],
 }
