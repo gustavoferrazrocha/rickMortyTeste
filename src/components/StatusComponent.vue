@@ -1,24 +1,21 @@
 <script setup lang="ts">
-
 const props = defineProps({
   status: String,
-  species: String,
-})
-
+  species: String
+});
 </script>
 
 <template>
   <div class="status">
-    <div 
-    class="status__circle" 
-    :class="{ 'alive': status === 'Alive', 'dead': status === 'Dead' }">
-  </div>
-    <span class="status__info">{{status}} - {{species}}</span>
+    <div
+      class="status__circle"
+      :class="{ alive: status === 'Alive', dead: status === 'Dead' }"
+    ></div>
+    <span class="status__info">{{ status }} - {{ species }}</span>
   </div>
 </template>
 
 <style lang="postcss" scoped>
-
 .status {
   @apply flex items-center gap-2;
 }
@@ -34,4 +31,3 @@ const props = defineProps({
   @apply bg-red-500;
 }
 </style>
-
