@@ -1,44 +1,42 @@
-## O Projeto teve o deploy feito na vercel então não precisamos instala-lo para velo.
+## O projeto foi implantado na Vercel, portanto, não é necessário instalá-lo para visualizá-lo.
 
-https://rick-morty-teste-eta.vercel.app/
+Você pode acessar o projeto através deste link: [https://rick-morty-teste-eta.vercel.app/](https://rick-morty-teste-eta.vercel.app/)
 
-## Para rodar o projeto na sua maquina siga os segintes comandos
+## Para executar o projeto em sua máquina, siga as instruções abaixo:
 
-```sh
-npm install
-```
+1. Abra o terminal e navegue até a pasta do projeto.
 
-### Compilar e atualizar para desenvolvimento
+2. Execute o seguinte comando para instalar as dependências necessárias:
+   
+   ```sh
+   npm install
+   ```
 
-```sh
-npm run dev
-```
+3. Para compilar e atualizar o projeto durante o desenvolvimento, utilize o seguinte comando:
+   
+   ```sh
+   npm run dev
+   ```
 
-### Type-Check, Compile and Minify for Production
+4. Se você desejar fazer testes de ponta a ponta com o [Cypress](https://www.cypress.io/), execute o seguinte comando para rodar os testes de desenvolvimento:
+   
+   ```sh
+   npm run test:e2e:dev
+   ```
 
-```sh
-npm run build
-```
+   Isso executará os testes de ponta a ponta no servidor de desenvolvimento do Vite. Isso é mais rápido do que usar a compilação de produção.
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+5. No entanto, é recomendável também testar a versão de produção com o seguinte comando antes de implantar (por exemplo, em ambientes de integração contínua):
 
-```sh
-npm run test:e2e:dev
-```
+   ```sh
+   npm run build
+   npm run test:e2e
+   ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+6. Para verificar a qualidade do código com o [ESLint](https://eslint.org/), use o seguinte comando:
+   
+   ```sh
+   npm run lint
+   ```
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
-
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
-# rickMortyTeste
+Assim, você poderá executar e testar o projeto em sua máquina local seguindo essas etapas.
